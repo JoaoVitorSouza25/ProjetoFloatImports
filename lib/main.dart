@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:appfloat/model/drawer.dart';
-import 'package:appfloat/view/login.dart';
+import 'package:appfloat/view/TelaInicial.dart';
+//import 'package:appfloat/view/Login/login.dart';
 
 //teste1aaaaaaaaaaaaa
 void main()
@@ -15,7 +15,7 @@ class Inicializacao extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Principal(),
     );
   }
 }
