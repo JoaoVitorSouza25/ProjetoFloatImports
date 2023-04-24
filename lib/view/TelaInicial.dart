@@ -1,7 +1,15 @@
 //Biblioteca
+import 'package:appfloat/view/Funcionalidades/clientes.dart';
+import 'package:appfloat/view/Funcionalidades/compras.dart';
+import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
+import 'package:appfloat/view/Funcionalidades/produtos.dart';
+import 'package:appfloat/view/Funcionalidades/sobre.dart';
+import 'package:appfloat/view/Funcionalidades/perfil.dart';
+import 'package:appfloat/view/Funcionalidades/vendas.dart';
 import 'package:appfloat/view/Login/login.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:flutter/material.dart';
+
 
 //Classe
 class Principal extends StatelessWidget {
@@ -21,7 +29,7 @@ Widget build(BuildContext context) {
           children: [
             Image.asset('lib/imagens/perfil.png', height: 70, width: 70),
             const SizedBox(height: 10,),
-            const Text('Float Imports', style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),),
+            const Text('João Vitor de Paula Souza', style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),),
             const Text('contato@floatimports.com.br', style: TextStyle(color: Colors.white),),
             const SizedBox(height: 6),
             const Divider(
@@ -33,32 +41,45 @@ Widget build(BuildContext context) {
               title: const Text(
                 'Vendas', style: TextStyle(color: Colors.white,)),
               onTap: () {
-                
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Vendas()),);
               },
             ),
             ListTile(
               leading: const Icon(Icons.sell_outlined, color: Colors.white,),
               title: const Text(
                 'Produtos', style: TextStyle(color: Colors.white,),),
-              onTap: (){},
+              onTap: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Produtos()),);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.person, color: Colors.white,),
               title: const Text(
                 'Clientes', style: TextStyle(color: Colors.white,),),
-              onTap: (){},
+              onTap: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Clientes()),);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.shopping_cart_outlined, color: Colors.white,),
               title: const Text(
                 'Compras', style: TextStyle(color: Colors.white,)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Compras()),);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.assessment_outlined, color: Colors.white,),
               title: const Text(
                 'Estatísticas', style: TextStyle(color: Colors.white,)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Estatisticas()),);
+              },
             ),
 
             //Divisor
@@ -70,13 +91,19 @@ Widget build(BuildContext context) {
               leading: const Icon(Icons.account_circle_rounded, color: Colors.white,),
               title: const Text(
                 'Perfil', style: TextStyle(color: Colors.white,)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Perfil()),);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.info_outline, color: Colors.white,),
               title: const Text(
                 'Sobre', style: TextStyle(color: Colors.white,)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Sobre()), );
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.white,),
@@ -84,7 +111,7 @@ Widget build(BuildContext context) {
                 'Sair', style: TextStyle(color: Colors.white)),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Login()), );
+                  context, MaterialPageRoute(builder: (context) => const Login()),);
               },
             ),
           ],
@@ -107,7 +134,10 @@ Widget build(BuildContext context) {
             //Botão Vendas
             Botao(
               texto: 'VENDAS', 
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Vendas()),);
+              }
             ),
 
             //Espaçamento
@@ -169,7 +199,10 @@ Widget build(BuildContext context) {
             //Botão Produtos
             Botao(
               texto: 'PRODUTOS', 
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Produtos()),);
+              }
             ),
 
             //Espaçamento
@@ -231,7 +264,10 @@ Widget build(BuildContext context) {
             //Botão Compras
             Botao(
               texto: 'COMPRAS', 
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Compras()),);
+              }
             ),
 
             //Espaçamento
@@ -294,7 +330,10 @@ Widget build(BuildContext context) {
             //Botão Clientes
             Botao(
               texto: 'CLIENTES', 
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Clientes()),);
+              }
             ),
 
             //Espaçamento
@@ -303,7 +342,10 @@ Widget build(BuildContext context) {
             //Botão Estatisticas
             Botao(
               texto: 'ESTATÍSTICAS', 
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const Estatisticas()),);
+              }
             )
           ],
         ),
