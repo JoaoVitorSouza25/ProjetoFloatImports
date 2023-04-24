@@ -15,7 +15,8 @@ Widget build(BuildContext context) {
     ),
 
     body: SafeArea(
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         children: 
           [
             //Espaçamento
@@ -136,12 +137,9 @@ Widget build(BuildContext context) {
             )
 
             )
-
-            
-                  
-            
           ]
       )
+      ),
     )//SafeArea 
   ); //Scaffold
 }//Widget

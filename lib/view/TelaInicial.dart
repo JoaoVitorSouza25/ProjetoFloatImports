@@ -124,7 +124,8 @@ Widget build(BuildContext context) {
     ),
 
     body: SafeArea(
-      child: Center(
+      child: SingleChildScrollView(
+        child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -350,6 +351,7 @@ Widget build(BuildContext context) {
           ],
         ),
       )
+      ),
     )//SafeArea 
   ); //Scaffold
 }//Widget

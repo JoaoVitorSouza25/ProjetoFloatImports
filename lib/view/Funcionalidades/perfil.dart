@@ -14,7 +14,8 @@ class Perfil extends StatelessWidget {
 
 @override
 Widget build(BuildContext context) {
-  return Scaffold(
+  return 
+  Scaffold(
     backgroundColor: const Color.fromARGB(255, 255,208,210),
 
     appBar:  AppBar(
@@ -23,8 +24,9 @@ Widget build(BuildContext context) {
     ),
 
     body: SafeArea(
-      //Centralizar
-      child: Center(
+      child: SingleChildScrollView(
+        //Centralizar
+        child: Center(
         child:Column(
           children: [
 
@@ -181,7 +183,7 @@ Widget build(BuildContext context) {
           ),
 
             //Espaçamento
-            const SizedBox(height: 60),
+            const SizedBox(height: 50),
 
             //Entrar
             SizedBox(
@@ -227,7 +229,10 @@ Widget build(BuildContext context) {
             ), //SizedBox
           ], //Children Column
          ), //Column
-        ), //Center
+        ), 
+
+      ),
+      //Center
       ), //SafeArea
     );//Scaffold
 }//Widget
