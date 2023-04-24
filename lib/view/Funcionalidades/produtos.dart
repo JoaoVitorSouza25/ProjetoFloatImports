@@ -9,7 +9,6 @@ import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Funcionalidades/vendas.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:appfloat/view/Login/login.dart';
-import 'package:appfloat/view/Modelos/categoriaCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -128,6 +127,7 @@ Widget build(BuildContext context) {
 
     appBar: AppBar(
       backgroundColor: const Color.fromARGB(255, 109,0,1),
+      title: Text('Produtos'),
       ),
 
     body: SafeArea(
@@ -147,25 +147,84 @@ Widget build(BuildContext context) {
           //Espaçamento
           const SizedBox(height: 15,),
 
-          const CategoriaCard(),
-
           const SizedBox(height: 15),
 
           Expanded(
             child: AlignedGridView.count(
               crossAxisCount: 2,
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              itemCount: produtoBase.length,
               itemBuilder: (context, index)
               {
                 return Container(
                   width: double.maxFinite,
-                  decoration: const BoxDecoration(color: Colors.white),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 8),
 
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(produtoBase[index].imagem, height: 200, width: double.maxFinite, 
+                            fit: BoxFit.cover,),
+                          ),),
+                        
+      
+
+                      SizedBox(height: 4),
+
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+
+                        Text(produtoBase[index].time,
+                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
+                        fontSize: 16, fontWeight: FontWeight.bold),),
+
+                        Text(produtoBase[index].categoria,
+                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
+                        fontSize: 16, fontWeight: FontWeight.bold),),
+                        ],),
+                      ),
+                        SizedBox(height: 8),
+                        
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(produtoBase[index].preco,
+                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
+                        fontSize: 20, fontWeight: FontWeight.w900),),),
+
+                        SizedBox(height: 8),
+
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(produtoBase[index].desc,
+                        maxLines: 2,
+                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
+                        fontSize: 14  ),),),
+
+
+                      ],
+
+
+                  ),
+                
                 );
               },
               ),
           ),
+
+          const SizedBox(height: 15),
+          
+          Botao(
+              texto: 'CADASTRAR PRODUTO', 
+              onPressed: (){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const CadProd()),);
+              }
+            ),
       ]),
       ),
     ),
