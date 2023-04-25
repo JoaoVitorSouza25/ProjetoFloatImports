@@ -68,6 +68,11 @@ flutter:
       - lib/imagens/perfil.png
       - lib/imagens/cesare.jpg
       - lib/imagens/joao.jpg
+      - lib/imagens/arsenal.jpeg
+      - lib/imagens/barcelona.jpeg
+      - lib/imagens/brasil.jpeg
+      - lib/imagens/brasil2.jpeg
+      - lib/imagens/real.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

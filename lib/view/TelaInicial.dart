@@ -1,11 +1,11 @@
 //Biblioteca
-import 'package:appfloat/view/Funcionalidades/clientes.dart';
-import 'package:appfloat/view/Funcionalidades/compras.dart';
+import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
-import 'package:appfloat/view/Funcionalidades/produtos.dart';
+import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
-import 'package:appfloat/view/Funcionalidades/vendas.dart';
+import 'package:appfloat/view/Vendas/vendas.dart';
 import 'package:appfloat/view/Login/login.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ Widget build(BuildContext context) {
       backgroundColor: const Color.fromARGB(150, 109,0,1),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 50),
-        child: Column(  
+          child: Column(  
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           //Foto do usuario
@@ -116,7 +116,7 @@ Widget build(BuildContext context) {
             ),
           ],
         ),
-      ),
+        )
     ), // Drawer
 
     appBar: AppBar(
@@ -353,6 +353,7 @@ Widget build(BuildContext context) {
       )
       ),
     )//SafeArea 
-  ); //Scaffold
+  ); //Scaffold,
+
 }//Widget
 } //Classe

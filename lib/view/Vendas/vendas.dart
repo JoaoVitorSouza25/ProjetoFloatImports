@@ -1,27 +1,25 @@
 //Biblioteca
-import 'package:appfloat/Dados/produtosBase.dart';
-import 'package:appfloat/view/Funcionalidades/cadastrarproduto.dart';
-import 'package:appfloat/view/Funcionalidades/clientes.dart';
-import 'package:appfloat/view/Funcionalidades/compras.dart';
+import 'package:appfloat/Dados/vendasBase.dart';
+import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
-import 'package:appfloat/view/Funcionalidades/vendas.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:appfloat/view/Login/login.dart';
+import 'package:appfloat/view/Modelos/botao.dart';
+import 'package:appfloat/view/Produtos/produtos.dart';
+import 'package:appfloat/view/Vendas/cadastrarvenda.dart';
+import 'package:appfloat/view/Vendas/editarVenda.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-
 
 //Classe
-class Produtos extends StatelessWidget {
-  const Produtos({super.key});
+class Vendas extends StatelessWidget {
+  const Vendas({super.key});
 
 @override
 Widget build(BuildContext context) {
-
   return Scaffold(
+
     backgroundColor: Color.fromARGB(255, 255,208,210),
     
     drawer: Drawer(
@@ -127,13 +125,16 @@ Widget build(BuildContext context) {
 
     appBar: AppBar(
       backgroundColor: const Color.fromARGB(255, 109,0,1),
-      title: Text('Produtos'),
+      title: Text('Vendas'),
       ),
 
     body: SafeArea(
       child: Padding(padding: const EdgeInsets.all(12),
-        child: Column(children: [
-          const SizedBox(height: 15),
+      child: SingleChildScrollView(
+       child: Column(
+        children: 
+          [
+            const SizedBox(height: 15),
           TextFormField(
             cursorColor:const Color.fromARGB(255, 109,0,1),
             decoration: const InputDecoration(
@@ -147,87 +148,43 @@ Widget build(BuildContext context) {
           //Espaçamento
           const SizedBox(height: 15,),
 
-          const SizedBox(height: 15),
-
-          Expanded(
-            child: AlignedGridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              itemCount: produtoBase.length,
-              itemBuilder: (context, index)
+          SizedBox(
+            child: Expanded(child: ListView.separated(
+              shrinkWrap: true,
+              separatorBuilder: (__, _) => const Divider(),
+              itemCount: vendaBase.length,
+              itemBuilder: ((context, index) 
               {
-                return Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 8),
-
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(produtoBase[index].imagem, height: 200, width: double.maxFinite, 
-                            fit: BoxFit.cover,),
-                          ),),
-                        
-      
-
-                      SizedBox(height: 4),
-
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                        Text(produtoBase[index].time,
-                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
-                        fontSize: 16, fontWeight: FontWeight.bold),),
-
-                        Text(produtoBase[index].categoria,
-                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
-                        fontSize: 16, fontWeight: FontWeight.bold),),
-                        ],),
-                      ),
-                        SizedBox(height: 8),
-                        
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(produtoBase[index].preco,
-                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
-                        fontSize: 20, fontWeight: FontWeight.w900),),),
-
-                        SizedBox(height: 8),
-
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(produtoBase[index].desc,
-                        maxLines: 2,
-                        style: TextStyle(color: Color.fromARGB(255, 109,0,1),
-                        fontSize: 14  ),),),
-
-
-                      ],
-
-
-                  ),
-                
-                );
-              },
-              ),
+                  return ListTile(
+                    onTap: ()
+                    {
+                      Navigator.push(
+                      context,
+                        MaterialPageRoute(builder: (context) => const editarVenda()));
+                    }
+                    ,
+                      title: Text('Pedido: ' + vendaBase[index].pedido),
+                  );
+              }),
+            ),
+            ),
           ),
 
           const SizedBox(height: 15),
           
           Botao(
-              texto: 'CADASTRAR PRODUTO', 
+              texto: 'ADICIONAR VENDA', 
               onPressed: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const CadProd()),);
+                  context, MaterialPageRoute(builder: (context) => const CadVenda()),);
               }
             ),
-      ]),
+            
+          ]
+        ),
       ),
-    ),
-  );
-}
-}
+    )
+    )//SafeArea 
+  ); //Scaffold
+}//Widget
+} //Classe

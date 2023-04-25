@@ -1,11 +1,14 @@
 //Biblioteca
-import 'package:appfloat/view/Funcionalidades/produtos.dart';
+import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Compras/compras.dart';
+import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
+import 'package:appfloat/view/Vendas/vendas.dart';
 import 'package:flutter/material.dart';
 
 //Classe
-class CadProd extends StatelessWidget {
-  const CadProd({super.key});
+class CadCliente extends StatelessWidget {
+  const CadCliente({super.key});
 
 @override
 Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ Widget build(BuildContext context) {
 
     appBar:  AppBar(
       backgroundColor: const Color.fromARGB(255, 109,0,1),
-      title: const Text('CADASTRAR PRODUTO'),
+      title: const Text('CADASTRAR CLIENTE'),
     ),
 
     body: SafeArea(
@@ -22,26 +25,29 @@ Widget build(BuildContext context) {
         child: Column(
         children: 
           [
-             SizedBox(height: 20),
+
+
+             const SizedBox(height: 20),
 
              //Texto introdutório
             const Text(' Informe os dados:',
               style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            const Text('CÓDIGO SKU',
+            const SizedBox(height: 30),
+
+            const Text('Informe o código',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-            //SKU
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'SKU',
+                  hintText: 'Código do cliente',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -53,18 +59,40 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe a categoria:',
+            const Text('Nome do cliente',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-            //Categoria
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'Categoria',
+                hintText: 'Nome',
+                hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),),
+                fillColor: Color.fromARGB(255, 255,255,255),
+                filled: true),)
+              ),
+
+
+              SizedBox(height: 20),
+
+              const Text('Informe o CPF',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
+
+            //Espaçamento
+            const SizedBox(height: 10),
+
+            Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
+              child: TextField(
+                decoration: InputDecoration(
+                hintText: '000.000.000-00',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -76,18 +104,17 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o clube/seleção:',
+              const Text('Informe o telefone:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Clube/Seleção
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'Clube/Seleção',
+                hintText: '(00) 00000-0000',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -99,18 +126,17 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o tipo:',
+              const Text('Endereço:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Tipo
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'Tipo',
+                hintText: 'Rua, nº, bairro',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -122,18 +148,17 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Crie a descrição:',
+              const Text('CEP:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Descrição
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'Descrição',
+                hintText: '00.000-000',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -145,18 +170,17 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o preço:',
+              const Text('Cidade:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Preço
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
                 decoration: InputDecoration(
-                hintText: 'Preço',
+                hintText: 'Cidade/ES',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -167,16 +191,18 @@ Widget build(BuildContext context) {
               ),
 
               SizedBox(height: 20),
+
+              
 
               Botao(
-              texto: 'CADASTRAR PRODUTO', 
+              texto: 'CADASTRAR CLIENTE', 
               onPressed: (){
                 showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('PRODUTO ADICIONADO'),
-                    content: const Text('Seu produto foi adicionado com sucesso!',
+                    title: const Text('CLIENTE CADASTRADO'),
+                    content: const Text('Seu cliente foi cadastrado com sucesso!',
                         style:  TextStyle(
                         color: Color.fromARGB(255, 109,0,1),)
                     ),
@@ -184,7 +210,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Produtos()), );
+                          context, MaterialPageRoute(builder: (context) => const Clientes()), );
                         },
                         child: const Text('OK'),
                       ),

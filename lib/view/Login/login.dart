@@ -140,7 +140,7 @@ class Login extends StatelessWidget {
                 //Mover para a tela main
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Principal()),
+                  MaterialPageRoute(builder: (context) => Principal()),
                 );
                 
               },
