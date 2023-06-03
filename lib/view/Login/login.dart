@@ -19,82 +19,82 @@ class Login extends StatelessWidget {
 
       //Corpo fora do topo
       body: SafeArea(
-        //Centralizar
+        child: SingleChildScrollView(
+           //Centralizar
         child: Center(
           child:Column(
         children: [
 
           //Espaçamento
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
 
           //Texto introdutório
           const Text(' Bem vindo ao Float Imports Controller!',
           style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold)),
 
           //Espaçamento
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
 
           //Logo da loja
           Image.asset('lib/imagens/logoapp.png', height: 250, width: 250),
 
           //Espaçamento
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
           
           //Email
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 60.0),
+          const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
             decoration: InputDecoration(
-              icon: Icon(Icons.person, color: Color.fromARGB(255, 255,208,210)),
-              
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 8.0, right: 4.0),
+                child: Icon(Icons.person, color: Color.fromARGB(255, 109, 0, 1)),
+              ),
               hintText: 'Email',
-              hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
+              hintStyle: TextStyle(color: Color.fromARGB(255, 109, 0, 1)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black12),
-                ),
-                fillColor: Color.fromARGB(255, 255,208,210),
-                filled: true,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black12),
+              ),
+              fillColor: Color.fromARGB(255, 255, 208, 210),
+              filled: true,
             ),
-
-            //Teclado de email
             keyboardType: TextInputType.emailAddress,
-            )
           ),
+        ),
 
           //Espaçamento
-          const SizedBox(height: 25),
+          const SizedBox(height: 20),
 
           //Senha
-
-          Padding(padding: EdgeInsets.symmetric(horizontal: 60.0),
+          const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
-            decoration: InputDecoration(    
-              icon: const Icon(Icons.lock, color: Color.fromARGB(255, 255,208,210)),
-              suffixIcon: IconButton(
-                icon: Oculto ? Icon(Icons.visibility_off) : Icon(Icons.visibility, color: Color.fromARGB(255, 109,0,1)),
-              onPressed: (){
-                  setState((){
-                        Oculto = false;
-                  });
-              },
+            decoration: InputDecoration(
+
+              prefixIcon: Padding(
+                
+                padding: EdgeInsets.only(left: 8.0, right: 4.0),
+                child: Icon(Icons.lock, color: Color.fromARGB(255, 109, 0, 1)),
+                
+                
               ),
               hintText: 'Senha',
-              hintStyle: const TextStyle(color: Color.fromARGB(255, 109,0,1)),
-              enabledBorder: const OutlineInputBorder(
+              hintStyle: TextStyle(color: Color.fromARGB(255, 109, 0, 1)),
+              enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black12),
-                ),
-                fillColor: const Color.fromARGB(255, 255,208,210),
-                filled: true,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black12),
+              ),
+              fillColor: Color.fromARGB(255, 255, 208, 210),
+              filled: true,
             ),
-            //Ocultar os caracteres
-            obscureText: Oculto,
-            ) 
+            obscureText: true,
           ),
+        ),
 
           //Espaçamento
           const SizedBox(height: 15),
@@ -102,7 +102,7 @@ class Login extends StatelessWidget {
           //Esqueci minha senha
           Padding(
             //Espaço da lateral
-            padding: const EdgeInsets.symmetric(horizontal: 60.0), 
+            padding: const EdgeInsets.symmetric(horizontal: 20.0), 
             child: Row(
               //Alinhar na lateral direita
               mainAxisAlignment: MainAxisAlignment.end,
@@ -129,7 +129,7 @@ class Login extends StatelessWidget {
             ),
 
           //Espaçamento
-          const SizedBox(height: 25),
+          const SizedBox(height: 15),
 
           //Entrar
           SizedBox(
@@ -162,7 +162,7 @@ class Login extends StatelessWidget {
         ),
 
         //Espaçamento
-        const SizedBox(height: 25),
+        const SizedBox(height: 15),
 
         //Detalhe
         Padding(padding: const EdgeInsets.symmetric(horizontal: 60.0),
@@ -188,7 +188,7 @@ class Login extends StatelessWidget {
           ),
 
         //Espaçamento
-        const SizedBox(height: 25),
+        const SizedBox(height: 15),
 
         //Logar com conta google/apple
         Row(
@@ -213,7 +213,7 @@ class Login extends StatelessWidget {
             ),
             
             //Espaçamento lateral
-            const SizedBox(width: 25),
+            const SizedBox(width: 35),
 
             //Inkwell para usar ontap
             InkWell(
@@ -236,7 +236,7 @@ class Login extends StatelessWidget {
         ),
 
         //Espaçamento
-        const SizedBox(height: 50),
+        const SizedBox(height: 30),
 
         //Cadastre-se
         Row(
@@ -280,6 +280,8 @@ class Login extends StatelessWidget {
         ],
                       ), 
                       )
+
+        )
                     ),
     );
   }
