@@ -1,28 +1,33 @@
 //Biblioteca
-import 'package:appfloat/Dados/clientesBase.dart';
-import 'package:appfloat/Dados/comprasBase.dart';
-import 'package:appfloat/Dados/vendasBase.dart';
-import 'package:appfloat/view/Clientes/editarCliente.dart';
-import 'package:appfloat/view/Compras/cadastrarCompra.dart';
-import 'package:appfloat/view/Compras/editarCompra.dart';
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/controller/clientes_controller.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
-import 'package:appfloat/view/Login/login.dart';
+import 'package:appfloat/view/Login/login_view.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Vendas/cadastrarvenda.dart';
-import 'package:appfloat/view/Vendas/editarVenda.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../Vendas/vendas.dart';
 import 'cadastrarclientes.dart';
 
 //Classe
-class Clientes extends StatelessWidget {
+class Clientes extends StatefulWidget {
   const Clientes({super.key});
+
+  @override
+  State<Clientes> createState() => _ClientesState();
+}
+
+  class _ClientesState extends State<Clientes> {
+  var txtnome= TextEditingController();
+  var txtCPF= TextEditingController();
+  var txttelefone= TextEditingController();
+  var txtEndereco = TextEditingController(); 
+  var txtcep = TextEditingController();
+  var txtcidade = TextEditingController();
 
 @override
 Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ Widget build(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.center,
           //Foto do usuario
           children: [
-            Image.asset('lib/imagens/perfil.png', height: 70, width: 70),
+            Image.asset('lib/images/perfil.png', height: 70, width: 70),
             const SizedBox(height: 10,),
             const Text('João Vitor de Paula Souza', style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),),
             const Text('contato@floatimports.com.br', style: TextStyle(color: Colors.white),),
@@ -105,7 +110,7 @@ Widget build(BuildContext context) {
                 'Perfil', style: TextStyle(color: Colors.white,)),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Perfil()),);
+                  context, MaterialPageRoute(builder: (context) => Perfil()),);
               },
             ),
             ListTile(
@@ -123,7 +128,7 @@ Widget build(BuildContext context) {
                 'Sair', style: TextStyle(color: Colors.white)),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Login()),);
+                  context, MaterialPageRoute(builder: (context) => const LoginView()),);
               },
             ),
           ],
@@ -135,64 +140,78 @@ Widget build(BuildContext context) {
       backgroundColor: const Color.fromARGB(255, 109,0,1),
       title: Text('Clientes'),
       ),
+      
+       body: SafeArea(
+        child: Column(
+          children: [
 
-    body: SafeArea(
-      child: Padding(padding: const EdgeInsets.all(12),
-      child: SingleChildScrollView(
-       child: Column(
-        children: 
-          [
-            const SizedBox(height: 15),
-          TextFormField(
-            cursorColor:const Color.fromARGB(255, 109,0,1),
-            decoration: const InputDecoration(
-              fillColor: Colors.white, filled: true,
-              hintText: 'Procurar',
-              hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
-              prefixIcon: Icon(Icons.search, color: Color.fromARGB(255, 109,0,1)),
-              ),
-          ),
-
-          //Espaçamento
-          const SizedBox(height: 15,),
-
-          SizedBox(
-            child: Expanded(child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (__, _) => const Divider(),
-              itemCount: clientesBase.length,
-              itemBuilder: ((context, index) 
-              {
-                  return ListTile(
-                    onTap: ()
-                    {
-                      Navigator.push(
-                      context,
-                        MaterialPageRoute(builder: (context) => const EditarCliente()));
-                    }
-                    ,
-                      title: Text('Nome do cliente: ' + clientesBase[index].nome),
+            Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: ClienteController().listar().snapshots(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return const Center(
+                    child: Text('Não foi possível conectar.'),
                   );
-              }),
-            ),
-            ),
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  final dados = snapshot.requireData;
+                  if (dados.size > 0) {
+                    return ListView.builder(
+                      itemCount: dados.size,
+                      itemBuilder: (context, index) {
+                        String id = dados.docs[index].id;
+                        dynamic item = dados.docs[index].data();
+                        return Card(
+                          child: ListTile(
+                            leading: const Icon(Icons.person),
+                            title: Text(item['nome']),
+                            subtitle: Text(item['nome']),
+                            onTap: () {
+                              txtnome.text = item['nome'];
+                              txtCPF.text = item['cpf'];
+                              txttelefone.text = item['telefone'];
+                              txtEndereco.text = item['endereco'];
+                              txtcep.text = item['cep'];
+                              txtcidade.text = item['cidade'];
+                            },
+                            onLongPress: () {
+                              // Realizar ação de exclusão do cliente
+                              ClienteController().excluir(context, id);
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Nenhum cliente encontrado.'),
+                    );
+                  }
+              }
+            },
           ),
+        ),
 
-          const SizedBox(height: 15),
-          
-          Botao(
+        SizedBox(height: 20),
+
+              Botao(
               texto: 'CADASTRAR CLIENTE', 
               onPressed: (){
                 Navigator.push(
                   context, MaterialPageRoute(builder: (context) => const CadCliente()),);
               }
             ),
-            
-          ]
-        ),
+
+          ],
+        )
       ),
-    )
-    )//SafeArea 
-  ); //Scaffold
+    );
+    
 }//Widget
 } //Classe

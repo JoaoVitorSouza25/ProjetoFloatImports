@@ -29,7 +29,7 @@ Widget build(BuildContext context) {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(70), // define o raio do canto para fazer a borda circular
                   child: Image.asset(
-                    'lib/imagens/cesare.jpg',
+                    'lib/images/cesare.jpg',
                     width: 150,
                     height: 150,
                     fit: BoxFit.cover,
@@ -42,7 +42,7 @@ Widget build(BuildContext context) {
               ClipRRect(
                   borderRadius: BorderRadius.circular(70), // define o raio do canto para fazer a borda circular
                   child: Image.asset(
-                    'lib/imagens/joao.jpg',
+                    'lib/images/joao.jpg',
                     width: 150,
                     height: 150, 
                     fit: BoxFit.cover,

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "471134807759",
+    "project_id": "floatimports-erp",
+    "storage_bucket": "floatimports-erp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471134807759:android:50f4d36da40cb1828ff9ba",
+        "android_client_info": {
+          "package_name": "com.example.appfloat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471134807759-nt2o6ih5e2kngi1jcvpqmpl4eqbd81j4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEDrCA5dPWaaZeRx-9VSaX1YMeUj-YOds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471134807759-3a4laan3sd1muhsdp7s2r038mehadfih.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "471134807759-pd7vb1sgjc47tn7568hi01rr9ukfb3d1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appfloat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

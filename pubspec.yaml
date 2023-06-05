@@ -2,7 +2,7 @@ name: appfloat
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+#publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -31,11 +31,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_staggered_grid_view: ^0.6.2
+  firebase_core: ^2.13.1
+  cloud_firestore: ^4.8.0
+  firebase_auth: ^4.6.2
+  brasil_fields: ^1.12.0
+  #device_preview: ^0.1.4-beta
 
 
 dev_dependencies:
@@ -62,17 +66,12 @@ flutter:
 
   # IMAGENS
   assets:
-      - lib/imagens/logoapp.png
-      - lib/imagens/apple.png
-      - lib/imagens/google.png
-      - lib/imagens/perfil.png
-      - lib/imagens/cesare.jpg
-      - lib/imagens/joao.jpg
-      - lib/imagens/arsenal.jpeg
-      - lib/imagens/barcelona.jpeg
-      - lib/imagens/brasil.jpeg
-      - lib/imagens/brasil2.jpeg
-      - lib/imagens/real.jpeg
+      - lib/images/logoapp.png
+      - lib/images/apple.png
+      - lib/images/google.png
+      - lib/images/perfil.png
+      - lib/images/cesare.jpg
+      - lib/images/joao.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

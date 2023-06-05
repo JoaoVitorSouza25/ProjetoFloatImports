@@ -1,5 +1,5 @@
 //Biblioteca
-import 'package:appfloat/Dados/produtosBase.dart';
+import 'package:appfloat/data/produtosBase.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:flutter/material.dart';

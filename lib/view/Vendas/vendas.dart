@@ -1,11 +1,11 @@
 //Biblioteca
-import 'package:appfloat/Dados/vendasBase.dart';
+import 'package:appfloat/data/vendasBase.dart';
 import 'package:appfloat/view/Clientes/clientes.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
-import 'package:appfloat/view/Login/login.dart';
+import 'package:appfloat/view/Login/login_view.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Vendas/cadastrarvenda.dart';
@@ -97,7 +97,7 @@ Widget build(BuildContext context) {
                 'Perfil', style: TextStyle(color: Colors.white,)),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Perfil()),);
+                  context, MaterialPageRoute(builder: (context) =>  Perfil()),);
               },
             ),
             ListTile(
@@ -115,7 +115,7 @@ Widget build(BuildContext context) {
                 'Sair', style: TextStyle(color: Colors.white)),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Login()),);
+                  context, MaterialPageRoute(builder: (context) => const LoginView()),);
               },
             ),
           ],

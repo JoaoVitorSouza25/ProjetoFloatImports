@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Recuperar extends StatelessWidget {
-  const Recuperar({Key? key}) : super(key: key);
+import '../../controller/login_controller.dart';
+
+class RecuperarView extends StatefulWidget {
+  const RecuperarView({super.key});
+
+  @override
+  State<RecuperarView> createState() => _RecuperarViewState();
+}
+
+class _RecuperarViewState extends State<RecuperarView> {
+  var txtEmailrec = TextEditingController();
+
+  @override
+  void initState() {  
+    super.initState();
+  }
 
    @override
   Widget build(BuildContext context) {
@@ -34,10 +48,11 @@ class Recuperar extends StatelessWidget {
             const SizedBox(height: 25),
 
             // Padding e TextField
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: txtEmailrec,
+                decoration: const InputDecoration(
                   hintText: 'E-mail',
                   hintStyle: TextStyle(color: Color.fromARGB(255, 255,208,210)),
                   enabledBorder: OutlineInputBorder(
@@ -50,7 +65,7 @@ class Recuperar extends StatelessWidget {
                   filled: true,
                 ),
                 keyboardType: TextInputType.emailAddress,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white, // Defina a cor do texto
                     ),
                   ),
@@ -65,27 +80,35 @@ class Recuperar extends StatelessWidget {
                   height: 56,
                   child: ElevatedButton(
                   onPressed: () {
+                    if(txtEmailrec.text.isEmpty)
+                    {
                       showDialog(
-      context: context,
-      builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('E-mail enviado!'),
-                    content: const Text('Foi enviado um e-mail para exemplo@gmail.com. Acesse o e-mail para recuperar sua senha',
-                    style:  TextStyle(
-                  color: Color.fromARGB(255, 109,0,1),
-                  )),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('E-mail inválido'),
+                            content: Text('Você não informou um e-mail válido! Tente novamente'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
                         },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
+                      );
+                    }
+                    else
+                    {
+                      LoginController().esqueceuSenha(
+                                context,
+                                txtEmailrec.text,
+                              );
+                      
 
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 255, 255), // cor de fundo

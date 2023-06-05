@@ -1,4 +1,5 @@
 //Biblioteca
+import 'package:appfloat/controller/login_controller.dart';
 import 'package:appfloat/view/Clientes/clientes.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
@@ -6,7 +7,7 @@ import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
 import 'package:appfloat/view/Vendas/vendas.dart';
-import 'package:appfloat/view/Login/login.dart';
+import 'package:appfloat/view/Login/login_view.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:flutter/material.dart';
 
@@ -20,14 +21,15 @@ Widget build(BuildContext context) {
   return Scaffold(
     drawer: Drawer(
       backgroundColor: const Color.fromARGB(150, 109,0,1),
-      child: Padding(
+      child: SingleChildScrollView(
+        child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 50),
           child: Column(  
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           //Foto do usuario
           children: [
-            Image.asset('lib/imagens/perfil.png', height: 70, width: 70),
+            Image.asset('lib/images/perfil.png', height: 70, width: 70),
             const SizedBox(height: 10,),
             const Text('João Vitor de Paula Souza', style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),),
             const Text('contato@floatimports.com.br', style: TextStyle(color: Colors.white),),
@@ -93,7 +95,7 @@ Widget build(BuildContext context) {
                 'Perfil', style: TextStyle(color: Colors.white,)),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Perfil()),);
+                  context, MaterialPageRoute(builder: (context) => Perfil()),);
               },
             ),
             ListTile(
@@ -110,13 +112,15 @@ Widget build(BuildContext context) {
               title: const Text(
                 'Sair', style: TextStyle(color: Colors.white)),
               onTap: (){
+                LoginController().logout();
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Login()),);
+                  context, MaterialPageRoute(builder: (context) => const LoginView()),);
               },
             ),
           ],
         ),
         )
+      )
     ), // Drawer
 
     appBar: AppBar(

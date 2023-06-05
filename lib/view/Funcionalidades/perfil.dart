@@ -1,16 +1,46 @@
 //Biblioteca
 import 'package:appfloat/view/TelaInicial.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-//Variavel para mudar Status do olho da senha
-// ignore: non_constant_identifier_names
-bool Oculto = true;
-
-TextEditingController _controller = TextEditingController(text: 'João Vitor Souza');
-
 //Classe
-class Perfil extends StatelessWidget {
+class Perfil extends StatefulWidget {
   const Perfil({super.key});
+
+
+@override
+  State<Perfil> createState() => _PerfilState();
+}
+
+class _PerfilState extends State<Perfil> {
+
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController cpfController = TextEditingController();
+  TextEditingController dataNascimentoController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Recuperar os dados do usuário do Firestore
+    recuperarDadosUsuario();
+  }
+
+  void recuperarDadosUsuario() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    String userId = user.uid;
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('usuarios').doc(userId).get();
+    if (snapshot.exists) {
+      Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
+      setState(() {
+        cpfController.text = userData['cpf'] ?? '';
+        nomeController.text = userData['nome'] ?? '';
+        dataNascimentoController.text = userData['dataNascimento'] ?? '';
+      });
+    }
+  }
+}
 
 @override
 Widget build(BuildContext context) {
@@ -51,10 +81,10 @@ Widget build(BuildContext context) {
             const SizedBox(height: 10),
 
             //Nome
-            const Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'João Vitor de Paula Souza',
+                controller: nomeController,
+                decoration: const InputDecoration(
                   hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                   enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),),
@@ -159,26 +189,15 @@ Widget build(BuildContext context) {
            //Inserir informações
           Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
           child: TextField(
-            decoration: InputDecoration(    
-              suffixIcon: IconButton(
-                icon: Oculto ? Icon(Icons.visibility_off) : Icon(Icons.visibility, color: Color.fromARGB(255, 109,0,1)),
-              onPressed: (){
-                  setState((){
-                        Oculto = false;
-                  });
-              },
-              ),
-              hintText: '********',
-              hintStyle: const TextStyle(color: Color.fromARGB(255, 109,0,1)),
-                enabledBorder: const OutlineInputBorder(
+            decoration:  const InputDecoration(
+              hintStyle:  TextStyle(color: Color.fromARGB(255, 109,0,1)),
+                enabledBorder:  OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder:  OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),),
-                fillColor: const Color.fromARGB(255, 255,255,255),
+                fillColor:  Color.fromARGB(255, 255,255,255),
                 filled: true
             ),
-            //Ocultar os caracteres
-            obscureText: Oculto,
             ) 
           ),
 
@@ -236,6 +255,4 @@ Widget build(BuildContext context) {
       ), //SafeArea
     );//Scaffold
 }//Widget
-
-void setState(Null Function() param0) {}
-} //Classe
+}

@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:appfloat/view/TelaInicial.dart';
-import 'package:appfloat/view/Login/cadastro.dart';
-import 'package:appfloat/view/Login/recuperar.dart';
+import 'package:appfloat/view/Login/cadastro_view.dart';
+import 'package:appfloat/view/Login/recuperar_view.dart';
+import 'package:appfloat/controller/login_controller.dart';
 
 //Variavel para mudar Status do olho da senha
 // ignore: non_constant_identifier_names
 bool Oculto = true;
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
+  var txtEmailEsqueceuSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +51,17 @@ class Login extends StatelessWidget {
           const SizedBox(height: 30),
 
           //Logo da loja
-          Image.asset('lib/imagens/logoapp.png', height: 250, width: 250),
+          Image.asset('lib/images/logoapp.png', height: 250, width: 250),
 
           //Espaçamento
           const SizedBox(height: 30),
           
           //Email
-          const Padding(
+          Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
-            decoration: InputDecoration(
+            controller: txtEmail,
+            decoration: const InputDecoration(
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 8.0, right: 4.0),
                 child: Icon(Icons.person, color: Color.fromARGB(255, 109, 0, 1)),
@@ -69,17 +85,14 @@ class Login extends StatelessWidget {
           const SizedBox(height: 20),
 
           //Senha
-          const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
-            decoration: InputDecoration(
-
-              prefixIcon: Padding(
-                
+            controller: txtSenha,
+            decoration: const InputDecoration(
+              prefixIcon:  Padding(
                 padding: EdgeInsets.only(left: 8.0, right: 4.0),
-                child: Icon(Icons.lock, color: Color.fromARGB(255, 109, 0, 1)),
-                
-                
+                child: Icon(Icons.lock, color: Color.fromARGB(255, 109, 0, 1)),              
               ),
               hintText: 'Senha',
               hintStyle: TextStyle(color: Color.fromARGB(255, 109, 0, 1)),
@@ -120,7 +133,7 @@ class Login extends StatelessWidget {
                     //Mover para a tela de recuperar
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Recuperar()),
+                    MaterialPageRoute(builder: (context) => const RecuperarView()),
                   );
                   },
                )
@@ -132,40 +145,40 @@ class Login extends StatelessWidget {
           const SizedBox(height: 15),
 
           //Entrar
-          SizedBox(
-          width: 390,
-          height: 56,
-          child: ElevatedButton(
-              onPressed: () {
-                //Mover para a tela main
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Principal()),
-                );
-                
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255), // cor de fundo
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // borda arredondada
-                ),
-              ),
-              child: const Text(
-                'ENTRAR',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 109,0,1), // cor do texto
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-        ),
+          Container(
+            width: MediaQuery.of(context).size.width - 40,
+           height: 56,
+  child: ElevatedButton(
+    onPressed: () {
+      LoginController().login(
+        context,
+        txtEmail.text,
+        txtSenha.text,
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255), // cor de fundo
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // borda arredondada
+      ),
+    ),
+    child: const Text(
+      'ENTRAR',
+      style: TextStyle(
+        color: Color.fromARGB(255, 109, 0, 1), // cor do texto
+        fontSize: 20,
+        fontWeight: FontWeight.w900,
+      ),
+    ),
+  ),
+),
+
 
         //Espaçamento
         const SizedBox(height: 15),
 
         //Detalhe
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 60.0),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(   
           children: const [
               Expanded(
@@ -208,7 +221,7 @@ class Login extends StatelessWidget {
                 color: const Color.fromARGB(255, 255,255,255),
               ),
               child: //Google
-              Image.asset('lib/imagens/google.png', height: 30, width: 30),       
+              Image.asset('lib/images/google.png', height: 30, width: 30),       
             ),
             ),
             
@@ -229,7 +242,7 @@ class Login extends StatelessWidget {
                 color: const Color.fromARGB(255, 255,255,255),
               ),
               child: //Google     
-            Image.asset('lib/imagens/apple.png', height: 30, width: 30),       
+            Image.asset('lib/images/apple.png', height: 30, width: 30),       
             ),
             ),
           ],
@@ -259,7 +272,7 @@ class Login extends StatelessWidget {
                 //Mover para a tela de cadastro
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Cadastro()),
+                  MaterialPageRoute(builder: (context) => const CadastroView()),
                 );
                  
               },
@@ -285,6 +298,4 @@ class Login extends StatelessWidget {
                     ),
     );
   }
-  
-  void setState(Null Function() param0) {}
 }
