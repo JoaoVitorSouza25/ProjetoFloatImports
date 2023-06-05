@@ -1,3 +1,4 @@
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/TelaInicial.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class Inicializacao extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Principal(),
+      home: Clientes(),
     );
   }
 }
