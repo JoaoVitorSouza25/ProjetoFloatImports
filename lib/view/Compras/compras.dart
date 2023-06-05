@@ -3,7 +3,7 @@ import 'package:appfloat/data/comprasBase.dart';
 import 'package:appfloat/data/vendasBase.dart';
 import 'package:appfloat/view/Compras/cadastrarCompra.dart';
 import 'package:appfloat/view/Compras/editarCompra.dart';
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';

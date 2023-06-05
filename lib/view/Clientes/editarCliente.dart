@@ -1,5 +1,5 @@
 //Biblioteca
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Modelos/botao.dart';

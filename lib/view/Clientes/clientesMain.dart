@@ -1,5 +1,6 @@
 //Biblioteca
 import 'package:appfloat/controller/clientes_controller.dart';
+import 'package:appfloat/view/Clientes/cadastrarclientes.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
@@ -7,11 +8,10 @@ import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Login/login_view.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
+import 'package:appfloat/view/Vendas/vendas.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../Vendas/vendas.dart';
-import 'cadastrarclientes.dart';
 
 //Classe
 class Clientes extends StatefulWidget {
@@ -142,61 +142,55 @@ Widget build(BuildContext context) {
       ),
       
        body: SafeArea(
-        child: Column(
+          child: Column(
           children: [
 
             Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: StreamBuilder<QuerySnapshot>(
-            stream: ClienteController().listar().snapshots(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  return const Center(
-                    child: Text('Não foi possível conectar.'),
+        padding: const EdgeInsets.all(20.0),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: ClienteController().listar().snapshots(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return Center(
+                  child: Text('Não foi possível conectar.'),
+                );
+              case ConnectionState.waiting:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              default:
+                final dados = snapshot.requireData;
+                if (dados.size > 0) {
+                  return Expanded(child: ListView.builder(
+                    itemCount: dados.size,
+                    itemBuilder: (context, index) {
+                      String id = dados.docs[index].id;
+                      dynamic item = dados.docs[index].data();
+                      return Card(
+                        child: ListTile(
+                          leading: Icon(Icons.description),
+                          title: Text(item['nome']),
+                          subtitle: Text(item['cpf']),
+                          onTap: () {
+                          },
+                          onLongPress: () {
+                            ClienteController().excluir(context, id);
+                          },
+                        ),
+                      );
+                    },
+                  )
                   );
-                case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                } else {
+                  return Center(
+                    child: Text('Nenhuma tarefa encontrada.'),
                   );
-                default:
-                  final dados = snapshot.requireData;
-                  if (dados.size > 0) {
-                    return ListView.builder(
-                      itemCount: dados.size,
-                      itemBuilder: (context, index) {
-                        String id = dados.docs[index].id;
-                        dynamic item = dados.docs[index].data();
-                        return Card(
-                          child: ListTile(
-                            leading: const Icon(Icons.person),
-                            title: Text(item['nome']),
-                            subtitle: Text(item['nome']),
-                            onTap: () {
-                              txtnome.text = item['nome'];
-                              txtCPF.text = item['cpf'];
-                              txttelefone.text = item['telefone'];
-                              txtEndereco.text = item['endereco'];
-                              txtcep.text = item['cep'];
-                              txtcidade.text = item['cidade'];
-                            },
-                            onLongPress: () {
-                              // Realizar ação de exclusão do cliente
-                              ClienteController().excluir(context, id);
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Nenhum cliente encontrado.'),
-                    );
-                  }
-              }
-            },
-          ),
+                }
+            }
+          },
         ),
+      ),
 
         SizedBox(height: 20),
 
@@ -210,7 +204,7 @@ Widget build(BuildContext context) {
 
           ],
         )
-      ),
+        )
     );
     
 }//Widget

@@ -1,6 +1,6 @@
 //Biblioteca
 import 'package:appfloat/data/vendasBase.dart';
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
@@ -163,6 +163,7 @@ Widget build(BuildContext context) {
                         MaterialPageRoute(builder: (context) => const editarVenda()));
                     }
                     ,
+                      // ignore: prefer_interpolation_to_compose_strings
                       title: Text('Pedido: ' + vendaBase[index].pedido),
                   );
               }),

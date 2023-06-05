@@ -1,6 +1,6 @@
 //Biblioteca
 import 'package:appfloat/controller/login_controller.dart';
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';

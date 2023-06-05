@@ -1,6 +1,6 @@
 //Biblioteca
 import 'package:appfloat/model/clientes.dart';
-import 'package:appfloat/view/Clientes/clientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Produtos/produtos.dart';
 import 'package:appfloat/view/Modelos/botao.dart';
@@ -201,7 +201,6 @@ Widget build(BuildContext context) {
               texto: 'CADASTRAR CLIENTE', 
               onPressed: (){
                 var c = Cliente(
-                  LoginController().idUsuario(),
                   nomecliente.text,
                   cpfcliente.text,
                   telcliente.text,
@@ -224,7 +223,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Clientes()), );
+                          context, MaterialPageRoute(builder: (context) => const Vendas()), );
                         },
                         child: const Text('OK'),
                       ),
