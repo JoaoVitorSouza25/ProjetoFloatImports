@@ -3,12 +3,12 @@ import 'package:appfloat/controller/login_controller.dart';
 import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
-import 'package:appfloat/view/Produtos/produtos.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
-import 'package:appfloat/view/Vendas/vendas.dart';
+import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:appfloat/view/Login/login_view.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
+import 'package:appfloat/model/botao.dart';
 import 'package:flutter/material.dart';
 
 
@@ -44,7 +44,7 @@ Widget build(BuildContext context) {
                 'Vendas', style: TextStyle(color: Colors.white,)),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Vendas()),);
+                  context, MaterialPageRoute(builder: (context) => const VendasView()),);
               },
             ),
             ListTile(
@@ -53,7 +53,7 @@ Widget build(BuildContext context) {
                 'Produtos', style: TextStyle(color: Colors.white,),),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Produtos()),);
+                  context, MaterialPageRoute(builder: (context) => const ProdutosView()),);
               },
             ),
             ListTile(
@@ -62,7 +62,7 @@ Widget build(BuildContext context) {
                 'Clientes', style: TextStyle(color: Colors.white,),),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Clientes()),);
+                  context, MaterialPageRoute(builder: (context) => Clientes()),);
               },
             ),
             ListTile(
@@ -141,7 +141,7 @@ Widget build(BuildContext context) {
               texto: 'VENDAS', 
               onPressed: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Vendas()),);
+                  context, MaterialPageRoute(builder: (context) => const VendasView()),);
               }
             ),
 
@@ -206,7 +206,7 @@ Widget build(BuildContext context) {
               texto: 'PRODUTOS', 
               onPressed: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Produtos()),);
+                  context, MaterialPageRoute(builder: (context) => const ProdutosView()),);
               }
             ),
 
@@ -337,7 +337,7 @@ Widget build(BuildContext context) {
               texto: 'CLIENTES', 
               onPressed: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Clientes()),);
+                  context, MaterialPageRoute(builder: (context) => Clientes()),);
               }
             ),
 

@@ -2,6 +2,7 @@
 import 'dart:html';
 
 import 'package:appfloat/view/Clientes/cadastrarclientes.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Clientes/editarCliente.dart';
 import 'package:appfloat/view/Compras/compras.dart';
 import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
@@ -10,24 +11,31 @@ import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Login/login_view.dart';
 import 'package:appfloat/model/botao.dart';
 import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/view/Vendas/cadastrarvenda.dart';
+import 'package:appfloat/view/Vendas/editarVenda.dart';
 import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 //Classe
-class Clientes extends StatefulWidget {
-  Clientes({super.key});
+class VendasView extends StatefulWidget {
+  const VendasView({super.key});
+
   @override
-  State<Clientes> createState() => _ClientesState();
+  State<VendasView> createState() => _VendasViewState();
 }
 
-class _ClientesState extends State<Clientes> {
-  var txtnome = TextEditingController();
-  var txtCPF = TextEditingController();
-  var txttelefone = TextEditingController();
-  var txtEndereco = TextEditingController();
-  var txtcep = TextEditingController();
-  var txtcidade = TextEditingController();
+class _VendasViewState extends State<VendasView> {
+  var pedido = TextEditingController();
+  var datapedido = TextEditingController();
+  var comprador = TextEditingController();
+  var codproduto = TextEditingController();
+  var quantidade = TextEditingController();
+  var vlrTotal = TextEditingController();
+  var formapag = TextEditingController();
+  var cepcomprador = TextEditingController();
+  var cidadecomprador = TextEditingController();
+  var endcomprador = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,8 @@ class _ClientesState extends State<Clientes> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const VendasView()),
+                        MaterialPageRoute(
+                            builder: (context) => const VendasView()),
                       );
                     },
                   ),
@@ -98,7 +107,7 @@ class _ClientesState extends State<Clientes> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ProdutosView()),
+                            builder: (context) => const ProdutosView()),
                       );
                     },
                   ),
@@ -218,13 +227,13 @@ class _ClientesState extends State<Clientes> {
 
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 109, 0, 1),
-          title: Text('Clientes'),
+          title: Text('Vendas'),
         ),
 
         body: Stack(alignment: Alignment.center, children: [
           StreamBuilder(
               stream:
-                  FirebaseFirestore.instance.collection('clientes').orderBy('nome').snapshots(),
+                  FirebaseFirestore.instance.collection('vendas').snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
@@ -240,7 +249,7 @@ class _ClientesState extends State<Clientes> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const EditarCliente()),
+                              builder: (context) => const editarVenda()),
                         );
                       },
                       child: Container(
@@ -252,55 +261,56 @@ class _ClientesState extends State<Clientes> {
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.person, size: 48),
+                                Icon(Icons.shopping_bag_outlined, size: 48),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                        RichText(
-                                          text: TextSpan(
-                                            style: DefaultTextStyle.of(context).style,
-                                            children: [
-                                              TextSpan(
-                                                text: 'Nome: ',
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: documents['nome'],
-                                                 style: TextStyle(
-                                                  fontSize: 20,
-                                                ),
-                                              ),
-                                            ],
+                                    RichText(
+                                      text: TextSpan(
+                                        style:
+                                            DefaultTextStyle.of(context).style,
+                                        children: [
+                                          TextSpan(
+                                            text: 'Pedido: ',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-
-                                        RichText(
-                                          text: TextSpan(
-                                            style: DefaultTextStyle.of(context).style,
-                                            children: [
-                                              TextSpan(
-                                                text: 'Endereço: ',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  // Outros estilos de texto, se necessário
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: documents['endereco'],
-                                              ),
-                                            ],
+                                          TextSpan(
+                                            text: documents['pedido'],
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
                                           ),
-                                        ),
+                                        ],
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        style:
+                                            DefaultTextStyle.of(context).style,
+                                        children: [
+                                          TextSpan(
+                                            text: 'Cliente: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              // Outros estilos de texto, se necessário
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: documents['comprador'],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
-
-                            
-                                Divider(thickness: 2,)
+                            Divider(
+                              thickness: 2,
+                            )
                           ],
                         ),
                       ),
@@ -311,26 +321,15 @@ class _ClientesState extends State<Clientes> {
           Positioned(
               bottom: 20, // ajuste a posição horizontal conforme necessário
               child: Botao(
-                  texto: 'CADASTRAR CLIENTE',
+                  texto: 'ADICIONAR VENDA',
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const CadCliente()),
+                      MaterialPageRoute(builder: (context) => const CadVenda()),
                     );
                   })),
         ]),
       ),
-
-      /*const SizedBox(height: 20),
-
-              Botao(
-              texto: 'CADASTRAR CLIENTE', 
-              onPressed: (){
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const CadCliente()),);
-              }
-              )*/
     );
   } //Widget
 } //Classe

@@ -1,7 +1,6 @@
 //Biblioteca
-import 'package:appfloat/data/produtosBase.dart';
-import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/model/botao.dart';
 import 'package:flutter/material.dart';
 
 //Classe
@@ -41,17 +40,6 @@ Widget build(BuildContext context) {
 
               //Espaçamento
             const SizedBox(height: 10),
-
-
-
-              Padding(padding: EdgeInsets.symmetric(horizontal: 50),
-                      child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network('lib/imagens/arsenal.jpeg', height: 300, width: double.maxFinite, 
-                            fit: BoxFit.cover,),
-                          ),),
-
-            const SizedBox(height: 30),
 
             const Text('CÓDIGO SKU',
               textAlign: TextAlign.left,
@@ -207,7 +195,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Produtos()), );
+                          context, MaterialPageRoute(builder: (context) => const ProdutosView()), );
                         },
                         child: const Text('OK'),
                       ),

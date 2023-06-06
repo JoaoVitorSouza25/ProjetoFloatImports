@@ -1,0 +1,55 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:appfloat/model/vendas.dart';
+
+import '../view/util.dart';
+import 'login_controller.dart';
+
+class VendasController {
+  //
+  // ADICIONAR uma nova Tarefa na Coleção
+  //
+  void adicionar(context, Venda v) {
+    FirebaseFirestore.instance
+        .collection('vendas')
+        .add(v.toJson())
+        .then((value) => sucesso(context, 'Venda adicionado com sucesso'))
+        .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'))
+        .whenComplete(() => Navigator.pop(context));
+  }
+
+  //
+  // LISTAR
+  //
+  listarVendas() {
+    return FirebaseFirestore.instance
+        .collection('vendas');
+        //.where('uid', isEqualTo: LoginController().idUsuario());
+  }
+
+  //
+  // ATUALIZAR
+  //
+  void atualizar(context, id, Venda v) {
+    FirebaseFirestore.instance
+        .collection('vendas')
+        .doc(id)
+        .update(v.toJson())
+        .then((value) => sucesso(context, 'Venda atualizada com sucesso'))
+        .catchError(
+            (e) => erro(context, 'Não foi possível atualizar a venda.'))
+        .whenComplete(() => Navigator.pop(context));
+  }
+
+  //
+  // EXCLUIR
+  //
+  void excluir(context, id) {
+    FirebaseFirestore.instance
+        .collection('vendas')
+        .doc(id)
+        .delete()
+        .then((value) => sucesso(context, 'Venda excluída com sucesso'))
+        .catchError((e) => erro(context, 'Não foi possível excluir a venda.'));
+  }
+}

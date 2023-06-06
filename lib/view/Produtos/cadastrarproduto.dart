@@ -1,11 +1,34 @@
 //Biblioteca
-import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
+import 'package:appfloat/controller/produtos_controller.dart';
+import 'package:appfloat/model/clientes.dart';
+import 'package:appfloat/model/produtos.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
+import 'package:appfloat/view/Compras/compras.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/model/botao.dart';
+import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:flutter/material.dart';
 
+import '../../controller/clientes_controller.dart';
+import '../../controller/login_controller.dart';
+
 //Classe
-class CadProd extends StatelessWidget {
+class CadProd extends StatefulWidget {
   const CadProd({super.key});
+
+  @override
+  State<CadProd> createState() => _CadProdState();
+}
+
+class _CadProdState extends State<CadProd> {
+  var ativo = TextEditingController();
+  var sku = TextEditingController();
+  var categoria = TextEditingController();
+  var time = TextEditingController();
+  var tipo = TextEditingController();
+  var desccamisa = TextEditingController();
+  var preco = TextEditingController();
+
 
 @override
 Widget build(BuildContext context) {
@@ -24,53 +47,48 @@ Widget build(BuildContext context) {
           [
 
 
-             SizedBox(height: 20),
+             const SizedBox(height: 20),
 
              //Texto introdutório
             const Text(' Informe os dados:',
               style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
-              SizedBox(height: 30),
+              SizedBox(height: 20),
 
-              const Text('ADICIONAR FOTO DO PRODUTO',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
-
-              //Espaçamento
-            const SizedBox(height: 10),
-
-              Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
-              child: SizedBox(
-                            width: double.maxFinite,
-                            height: 100,
-                            child: ElevatedButton(
-
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white, // cor de fundo
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        side: BorderSide(color: Colors.black)), // borda arredondada
-                                    ),
-                                    child: Text('Editar', 
-                                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                                        ),
-                                    )
-                        ),
-                      ),
-
-            const SizedBox(height: 30),
-
-            const Text('CÓDIGO SKU',
+            const Text('Ativo',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-            //SKU
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: ativo,
+                decoration: InputDecoration(
+                hintText: 'SIM/NÃO',
+                hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),),
+                fillColor: Color.fromARGB(255, 255,255,255),
+                filled: true),)
+              ),
+
+
+              SizedBox(height: 20),
+
+              const Text('Informe o SKU',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
+
+            //Espaçamento
+            const SizedBox(height: 10),
+
+            Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
+              child: TextField(
+                controller: sku,
                 decoration: InputDecoration(
                 hintText: 'SKU',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
@@ -91,9 +109,9 @@ Widget build(BuildContext context) {
             //Espaçamento
             const SizedBox(height: 10),
 
-            //Categoria
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: categoria,
                 decoration: InputDecoration(
                 hintText: 'Categoria',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
@@ -107,18 +125,18 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o clube/seleção:',
+              const Text('Time:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Clube/Seleção
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: time,
                 decoration: InputDecoration(
-                hintText: 'Clube/Seleção',
+                hintText: 'Clube/seleção',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -130,18 +148,18 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o tipo:',
+              const Text('Tipo:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Tipo
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: tipo,
                 decoration: InputDecoration(
-                hintText: 'Tipo',
+                hintText: 'Torcedor/Feminina',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -153,16 +171,16 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Crie a descrição:',
+              const Text('Descrição:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Descrição
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: desccamisa,
                 decoration: InputDecoration(
                 hintText: 'Descrição',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
@@ -176,18 +194,18 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o preço:',
+              const Text('Preço:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
             //Espaçamento
             const SizedBox(height: 10),
 
-              //Preço
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
+                controller: preco,
                 decoration: InputDecoration(
-                hintText: 'Preço',
+                hintText: '0,00',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -199,15 +217,28 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
+              
+
               Botao(
               texto: 'CADASTRAR PRODUTO', 
               onPressed: (){
+                var p = Produtos(
+                  ativo.text,
+                  sku.text,
+                  categoria.text,
+                  time.text,
+                  tipo.text,
+                  desccamisa.text,
+                  preco.text
+                );
+                  ProdutosController().adicionar(context, p);
+
                 showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('PRODUTO ADICIONADO'),
-                    content: const Text('Seu produto foi adicionado com sucesso!',
+                    title: const Text('PRODUTO CADASTRADO'),
+                    content: const Text('O produto foi cadastrado com sucesso!',
                         style:  TextStyle(
                         color: Color.fromARGB(255, 109,0,1),)
                     ),
@@ -215,7 +246,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Produtos()), );
+                          context, MaterialPageRoute(builder: (context) => ProdutosView()), );
                         },
                         child: const Text('OK'),
                       ),
@@ -226,11 +257,11 @@ Widget build(BuildContext context) {
               }
             ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
           ]
       )
       ),
     )//SafeArea 
   ); //Scaffold
-}//Widget
-} //Classe
+}//Widget 
+}//Classe

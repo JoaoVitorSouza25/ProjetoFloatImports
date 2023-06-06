@@ -1,9 +1,9 @@
 //Biblioteca
 import 'package:appfloat/view/Clientes/clientesMain.dart';
 import 'package:appfloat/view/Compras/compras.dart';
-import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
-import 'package:appfloat/view/Vendas/vendas.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/model/botao.dart';
+import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:flutter/material.dart';
 
 //Classe
@@ -210,7 +210,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Clientes()), );
+                          context, MaterialPageRoute(builder: (context) => Clientes()), );
                         },
                         child: const Text('OK'),
                       ),

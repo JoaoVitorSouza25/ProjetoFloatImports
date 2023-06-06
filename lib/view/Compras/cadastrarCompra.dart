@@ -1,8 +1,8 @@
 //Biblioteca
 import 'package:appfloat/view/Compras/compras.dart';
-import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
-import 'package:appfloat/view/Vendas/vendas.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/model/botao.dart';
+import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:flutter/material.dart';
 
 //Classe

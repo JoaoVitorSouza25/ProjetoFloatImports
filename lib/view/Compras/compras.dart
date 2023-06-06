@@ -1,6 +1,4 @@
 //Biblioteca
-import 'package:appfloat/data/comprasBase.dart';
-import 'package:appfloat/data/vendasBase.dart';
 import 'package:appfloat/view/Compras/cadastrarCompra.dart';
 import 'package:appfloat/view/Compras/editarCompra.dart';
 import 'package:appfloat/view/Clientes/clientesMain.dart';
@@ -9,13 +7,13 @@ import 'package:appfloat/view/Funcionalidades/estatisticas.dart';
 import 'package:appfloat/view/Funcionalidades/perfil.dart';
 import 'package:appfloat/view/Funcionalidades/sobre.dart';
 import 'package:appfloat/view/Login/login_view.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
-import 'package:appfloat/view/Produtos/produtos.dart';
+import 'package:appfloat/model/botao.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
 import 'package:appfloat/view/Vendas/cadastrarvenda.dart';
 import 'package:appfloat/view/Vendas/editarVenda.dart';
 import 'package:flutter/material.dart';
 
-import '../Vendas/vendas.dart';
+import '../Vendas/vendasMain.dart';
 
 //Classe
 class Compras extends StatelessWidget {
@@ -36,7 +34,7 @@ Widget build(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.center,
           //Foto do usuario
           children: [
-            Image.asset('lib/imagens/perfil.png', height: 70, width: 70),
+            Image.asset('lib/images/perfil.png', height: 70, width: 70),
             const SizedBox(height: 10,),
             const Text('João Vitor de Paula Souza', style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),),
             const Text('contato@floatimports.com.br', style: TextStyle(color: Colors.white),),
@@ -51,7 +49,7 @@ Widget build(BuildContext context) {
                 'Vendas', style: TextStyle(color: Colors.white,)),
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Vendas()),);
+                  context, MaterialPageRoute(builder: (context) => const VendasView()),);
               },
             ),
             ListTile(
@@ -60,7 +58,7 @@ Widget build(BuildContext context) {
                 'Produtos', style: TextStyle(color: Colors.white,),),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Produtos()),);
+                  context, MaterialPageRoute(builder: (context) => const ProdutosView()),);
               },
             ),
             ListTile(
@@ -69,7 +67,7 @@ Widget build(BuildContext context) {
                 'Clientes', style: TextStyle(color: Colors.white,),),
               onTap: (){
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const Clientes()),);
+                  context, MaterialPageRoute(builder: (context) => Clientes()),);
               },
             ),
             ListTile(
@@ -153,7 +151,7 @@ Widget build(BuildContext context) {
           //Espaçamento
           const SizedBox(height: 15,),
 
-          SizedBox(
+          /*SizedBox(
             child: Expanded(child: ListView.separated(
               shrinkWrap: true,
               separatorBuilder: (__, _) => const Divider(),
@@ -173,7 +171,7 @@ Widget build(BuildContext context) {
               }),
             ),
             ),
-          ),
+          ),*/
 
           const SizedBox(height: 15),
           

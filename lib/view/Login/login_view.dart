@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:appfloat/view/TelaInicial.dart';
 import 'package:appfloat/view/Login/cadastro_view.dart';
 import 'package:appfloat/view/Login/recuperar_view.dart';
 import 'package:appfloat/controller/login_controller.dart';
-
-//Variavel para mudar Status do olho da senha
-// ignore: non_constant_identifier_names
-bool Oculto = true;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

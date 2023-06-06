@@ -1,12 +1,37 @@
 //Biblioteca
-import 'package:appfloat/view/Produtos/produtos.dart';
-import 'package:appfloat/view/Modelos/botao.dart';
-import 'package:appfloat/view/Vendas/vendas.dart';
+import 'package:appfloat/controller/vendas_controller.dart';
+import 'package:appfloat/model/clientes.dart';
+import 'package:appfloat/model/vendas.dart';
+import 'package:appfloat/view/Clientes/clientesMain.dart';
+import 'package:appfloat/view/Compras/compras.dart';
+import 'package:appfloat/view/Produtos/produtosMain.dart';
+import 'package:appfloat/model/botao.dart';
+import 'package:appfloat/view/Vendas/vendasMain.dart';
 import 'package:flutter/material.dart';
 
+import '../../controller/clientes_controller.dart';
+import '../../controller/login_controller.dart';
+
 //Classe
-class CadVenda extends StatelessWidget {
+class CadVenda extends StatefulWidget {
   const CadVenda({super.key});
+
+  @override
+  State<CadVenda> createState() => _CadVendaState();
+}
+
+class _CadVendaState extends State<CadVenda> {
+  var pedido = TextEditingController();
+  var datapedido = TextEditingController();
+  var comprador = TextEditingController();
+  var codproduto = TextEditingController();
+  var quantidade = TextEditingController();
+  var vlrTotal = TextEditingController();
+  var formapag = TextEditingController();
+  var cepcomprador = TextEditingController();
+  var cidadecomprador = TextEditingController();
+  var endcomprador = TextEditingController();
+
 
 @override
 Widget build(BuildContext context) {
@@ -23,17 +48,13 @@ Widget build(BuildContext context) {
         child: Column(
         children: 
           [
-
-
              const SizedBox(height: 20),
 
              //Texto introdutório
             const Text(' Informe os dados:',
               style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
-              const SizedBox(height: 30),
-
-            const SizedBox(height: 30),
+              SizedBox(height: 20),
 
             const Text('Informe o pedido',
               textAlign: TextAlign.left,
@@ -44,8 +65,9 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Nº do pedido',
+                controller: pedido,
+                decoration: const InputDecoration(
+                hintText: 'Nº pedido',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -55,9 +77,10 @@ Widget build(BuildContext context) {
                 filled: true),)
               ),
 
-              SizedBox(height: 20),
 
-            const Text('DATA DO PEDIDO',
+              const SizedBox(height: 20),
+
+              const Text('Data do Pedido',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -66,7 +89,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: datapedido,
+                decoration: const InputDecoration(
                 hintText: 'dd/mm/aaaa',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -77,9 +101,9 @@ Widget build(BuildContext context) {
                 filled: true),)
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-              const Text('Informe o comprador',
+              const Text('Informe o cliente:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -88,7 +112,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: comprador,
+                decoration: const InputDecoration(
                 hintText: 'Nome do cliente',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -101,7 +126,7 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Adicione o produto',
+              const Text('Adicione o produto:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -110,8 +135,9 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
-                hintText: 'Código do Produto',
+                controller: codproduto,
+                decoration: const InputDecoration(
+                hintText: 'Código do produto',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -123,7 +149,7 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Quantidade',
+              const Text('Quantidade:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -132,7 +158,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: quantidade,
+                decoration: const InputDecoration(
                 hintText: 'Ex: 4',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -145,7 +172,7 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o valor total:',
+              const Text('Valor Total:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -154,8 +181,9 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
-                hintText: 'R\$ 0,00',
+                controller: vlrTotal,
+                decoration: const InputDecoration(
+                hintText: '0,00',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -167,7 +195,7 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Forma de pagamento:',
+              const Text('Formas de pagamento:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -176,7 +204,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: formapag,
+                decoration: const InputDecoration(
                 hintText: 'PIX/Cartão',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -198,8 +227,9 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
-                hintText: 'XX.XXX-XXX',
+                controller: cepcomprador,
+                decoration: const InputDecoration(
+                hintText: '00.000-000',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
@@ -220,7 +250,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: cidadecomprador,
+                decoration: const InputDecoration(
                 hintText: 'Cidade/ES',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -233,7 +264,7 @@ Widget build(BuildContext context) {
 
               SizedBox(height: 20),
 
-              const Text('Informe o Endereço:',
+              const Text('Informe o endereço:',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 109, 0, 1),fontWeight: FontWeight.bold)),
 
@@ -242,7 +273,8 @@ Widget build(BuildContext context) {
 
             Padding(padding: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextField(
-                decoration: InputDecoration(
+                controller: endcomprador,
+                decoration: const InputDecoration(
                 hintText: 'Rua, nº, bairro',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 109,0,1)),
                 enabledBorder: OutlineInputBorder(
@@ -253,16 +285,35 @@ Widget build(BuildContext context) {
                 filled: true),)
               ),
 
+
               SizedBox(height: 20),
+
+              
 
               Botao(
               texto: 'ADICIONAR VENDA', 
               onPressed: (){
+                var v = Venda(
+                  pedido.text,
+                  datapedido.text,
+                  comprador.text,
+                  codproduto.text,
+                  quantidade.text,
+                  vlrTotal.text,
+                  formapag.text,
+                  cepcomprador.text,
+                  cidadecomprador.text,
+                  endcomprador.text
+
+
+                );
+                  VendasController().adicionar(context, v);
+
                 showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('VENDA ADICIONADA'),
+                    title: const Text('VENDA ADICIONADA!'),
                     content: const Text('Sua venda foi adicionada com sucesso!',
                         style:  TextStyle(
                         color: Color.fromARGB(255, 109,0,1),)
@@ -271,7 +322,7 @@ Widget build(BuildContext context) {
                       TextButton(
                         onPressed: () {
                          Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const Vendas()), );
+                          context, MaterialPageRoute(builder: (context) => const VendasView()), );
                         },
                         child: const Text('OK'),
                       ),
@@ -282,11 +333,11 @@ Widget build(BuildContext context) {
               }
             ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
           ]
       )
       ),
     )//SafeArea 
   ); //Scaffold
-}//Widget
-} //Classe
+}//Widget 
+}//Classe
